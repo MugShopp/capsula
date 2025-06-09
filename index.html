@@ -1,0 +1,34 @@
+function enviarEmailsCapsula() {
+  const aba = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("email");
+  if (!aba) {
+    Logger.log('Aba "email" não encontrada!');
+    return;
+  }
+
+  Logger.log('Aba encontrada: email');
+
+  const dados = aba.getDataRange().getValues();
+
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0); // Zera o horário para comparação de datas
+
+  for (let i = 1; i < dados.length; i++) {
+    const nome = dados[i][0];
+    const email = dados[i][1];
+    const dataEnvio = new Date(dados[i][2]);
+    const link = dados[i][3];
+    const enviado = dados[i][4];
+
+    dataEnvio.setHours(0, 0, 0, 0); // Zera o horário da data programada
+
+    if (!enviado && dataEnvio.getTime() === hoje.getTime()) {
+      const assunto = "Sua cápsula do tempo está pronta!";
+      const corpo = `Olá ${nome},\n\nHoje é o grande dia! Sua mensagem da cápsula do tempo está pronta para ser vista:\n\n${link}\n\nCom carinho,\nEquipe MugShopp 💙`;
+
+      MailApp.sendEmail(email, assunto, corpo);
+
+      aba.getRange(i + 1, 5).setValue("Enviado");
+      Logger.log(`E-mail enviado para: ${email}`);
+    }
+  }
+}
