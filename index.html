@@ -1,34 +1,84 @@
-function enviarEmailsCapsula() {
-  const aba = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("email");
-  if (!aba) {
-    Logger.log('Aba "email" não encontrada!');
-    return;
-  }
-
-  Logger.log('Aba encontrada: email');
-
-  const dados = aba.getDataRange().getValues();
-
-  const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0); // Zera o horário para comparação de datas
-
-  for (let i = 1; i < dados.length; i++) {
-    const nome = dados[i][0];
-    const email = dados[i][1];
-    const dataEnvio = new Date(dados[i][2]);
-    const link = dados[i][3];
-    const enviado = dados[i][4];
-
-    dataEnvio.setHours(0, 0, 0, 0); // Zera o horário da data programada
-
-    if (!enviado && dataEnvio.getTime() === hoje.getTime()) {
-      const assunto = "Sua cápsula do tempo está pronta!";
-      const corpo = `Olá ${nome},\n\nHoje é o grande dia! Sua mensagem da cápsula do tempo está pronta para ser vista:\n\n${link}\n\nCom carinho,\nEquipe MugShopp 💙`;
-
-      MailApp.sendEmail(email, assunto, corpo);
-
-      aba.getRange(i + 1, 5).setValue("Enviado");
-      Logger.log(`E-mail enviado para: ${email}`);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cápsula do Tempo - MugShopp</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-  }
-}
+
+    img.logo {
+      width: 120px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 10px;
+      padding: 0 20px;
+    }
+
+    .ampulheta {
+      width: 60px;
+      height: 60px;
+      margin: 20px 0;
+      animation: girar 2s linear infinite;
+    }
+
+    @keyframes girar {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #contador {
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://i.imgur.com/GVXM9A0.png" alt="Logo MugShopp" class="logo"/>
+
+  <h1>Algo especial está sendo preparado para você...</h1>
+
+  <img src="https://i.imgur.com/yojV3fM.png" alt="Ampulheta" class="ampulheta"/>
+
+  <div id="contador"></div>
+
+  <script>
+    const dataFutura = new Date("2025-06-10T00:00:00").getTime();
+
+    function atualizarContador() {
+      const agora = new Date().getTime();
+      const distancia = dataFutura - agora;
+
+      if (distancia < 0) {
+        document.getElementById("contador").innerHTML = "A cápsula está pronta!";
+        return;
+      }
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+      document.getElementById("contador").innerHTML = 
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    atualizarContador(); // inicial
+    setInterval(atualizarContador, 1000); // atualiza a cada segundo
+  </script>
+</body>
+</html>
