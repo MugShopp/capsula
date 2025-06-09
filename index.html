@@ -18,25 +18,25 @@
     }
 
     h1 {
-      font-size: 22px;
-      margin: 10px 20px;
+      font-size: 24px;
+      margin: 20px;
     }
 
     .ampulheta {
-      width: 80px;
+      width: 220px;
       height: auto;
       margin: 20px 0;
     }
 
     #contador {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: bold;
       margin: 10px 0;
     }
 
     button {
-      margin-top: 10px;
-      padding: 8px 16px;
+      margin-top: 12px;
+      padding: 10px 20px;
       font-size: 16px;
       background-color: #008CBA;
       color: white;
@@ -50,8 +50,20 @@
     }
 
     .logo-rodape {
-      width: 120px;
+      width: 160px;
+      margin-top: 40px;
+    }
+
+    #mensagem-final {
       margin-top: 30px;
+      display: none;
+    }
+
+    video {
+      margin-top: 20px;
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -59,48 +71,46 @@
 
   <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
 
-  <img src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta" class="ampulheta"/>
+  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada" />
 
-  <div id="contador"></div>
+  <div id="contador">30</div>
 
   <button onclick="reiniciarContagem()">Recomeçar</button>
 
-  <img src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" class="logo-rodape"/>
+  <div id="mensagem-final">
+    <video controls>
+      <source src="capsula_VQ6JuIae.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+
+  <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
 
   <script>
+    let tempo = 30;
     let intervalo;
-    let duracao = 30 * 1000; // 30 segundos
 
     function iniciarContagem() {
-      const fim = new Date().getTime() + duracao;
-
-      function atualizar() {
-        const agora = new Date().getTime();
-        const distancia = fim - agora;
-
-        if (distancia < 0) {
+      document.getElementById('mensagem-final').style.display = 'none';
+      document.getElementById('contador').textContent = tempo;
+      intervalo = setInterval(() => {
+        tempo--;
+        document.getElementById('contador').textContent = tempo;
+        if (tempo <= 0) {
           clearInterval(intervalo);
-          document.getElementById("contador").innerHTML = "A cápsula está pronta!";
-          return;
+          document.getElementById('contador').textContent = '';
+          document.getElementById('mensagem-final').style.display = 'block';
         }
-
-        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
-        const milissegundos = Math.floor((distancia % 1000) / 10);
-
-        document.getElementById("contador").innerHTML = 
-          `${segundos}s ${milissegundos.toString().padStart(2, "0")}ms`;
-      }
-
-      atualizar(); // já mostra sem esperar 1s
-      intervalo = setInterval(atualizar, 50); // atualiza mais rápido
+      }, 1000);
     }
 
     function reiniciarContagem() {
       clearInterval(intervalo);
+      tempo = 30;
       iniciarContagem();
     }
 
-    iniciarContagem();
+    window.onload = iniciarContagem;
   </script>
 </body>
 </html>
