@@ -5,12 +5,12 @@
   <title>Cápsula do Tempo</title>
   <style>
     body {
-      background-color: #000;
-      color: white;
+      background-color: #fff;
+      color: #333;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
-      padding: 20px;
-      overflow-x: hidden;
+      padding: 30px 20px;
+      margin: 0;
     }
 
     .container {
@@ -18,44 +18,44 @@
       margin: 0 auto;
     }
 
+    h1 {
+      font-size: 32px;
+      margin-top: 30px;
+      color: #222;
+    }
+
     .ampulheta {
-      width: 200px;
+      width: 250px;
       height: auto;
-      margin: 40px auto 10px;
+      margin: 30px auto 10px;
     }
 
     #contador {
-      font-size: 72px;
+      font-size: 64px;
       font-weight: bold;
+      color: #333;
       margin: 20px 0;
-    }
-
-    .logo {
-      width: 180px;
-      margin-top: 20px;
     }
 
     .mensagem {
       font-size: 20px;
-      margin-top: 30px;
       line-height: 1.6;
-      color: #f0f0f0;
+      margin: 20px 0 30px;
     }
 
     .aviso {
-      color: #f39c12;
+      color: #d35400;
       font-weight: bold;
-      margin-top: 20px;
+      margin: 20px auto;
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 16px;
     }
 
     button {
       margin-top: 25px;
       padding: 12px 24px;
       font-size: 16px;
-      background-color: #2980b9;
+      background-color: #3498db;
       color: white;
       border: none;
       border-radius: 8px;
@@ -63,21 +63,27 @@
     }
 
     button:hover {
-      background-color: #3498db;
+      background-color: #2980b9;
     }
 
     video {
       width: 100%;
       max-width: 720px;
       margin-top: 30px;
+      display: none;
+    }
+
+    .logo {
+      width: 180px;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada">
+    <h1>Uma cápsula do tempo para o coração</h1>
 
-    <h1 style="margin-top: 20px;">Uma cápsula do tempo para o coração</h1>
+    <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada">
 
     <p class="mensagem">
       Já imaginou receber uma mensagem de si mesmo ou de alguém especial, enviada em outro tempo?<br>
@@ -89,17 +95,17 @@
     <div id="contador">30</div>
 
     <p class="aviso">
-      ✧ Atenção: se você clicar em <em>“Recomeçar”</em> ou atualizar a página, a contagem reinicia do zero e o vídeo reaparece só ao final. Aproveite esse momento com calma. ✧
+      ✧ Atenção: se você clicar em <em>“Recomeçar”</em> ou atualizar a página, a contagem reinicia do zero e o vídeo aparece só ao final. Viva esse momento com calma. ✧
     </p>
 
     <button onclick="reiniciarContagem()">Recomeçar</button>
 
-    <video id="video" controls style="display:none;">
+    <video id="video" controls>
       <source src="capsula_VQ6JuIae.mp4" type="video/mp4">
       Seu navegador não suporta vídeo.
     </video>
 
-    <img class="logo" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logotipo">
+    <img class="logo" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp">
   </div>
 
   <script>
@@ -129,7 +135,6 @@
       iniciarContagem();
     }
 
-    // Inicia a contagem ao carregar a página
     window.onload = iniciarContagem;
   </script>
 </body>
