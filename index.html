@@ -1,137 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Cápsula do Tempo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cápsula do Tempo - MugShopp</title>
   <style>
     body {
-      background-color: #fff;
-      color: #333;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      padding: 30px 20px;
       margin: 0;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+      padding-top: 60px;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
 
     h1 {
-      font-size: 32px;
-      margin-top: 30px;
-      color: #222;
+      font-size: 24px;
+      margin: 0 20px 20px;
+    }
+
+    p {
+      max-width: 600px;
+      margin: 10px 20px;
+      font-size: 16px;
+      color: #333;
     }
 
     .ampulheta {
-      width: 250px;
+      width: 220px;
       height: auto;
-      margin: 30px auto 10px;
-    }
-
-    #contador {
-      font-size: 64px;
-      font-weight: bold;
-      color: #333;
       margin: 20px 0;
     }
 
-    .mensagem {
-      font-size: 20px;
-      line-height: 1.6;
-      margin: 20px 0 30px;
-    }
-
-    .aviso {
-      color: #d35400;
+    #contador {
+      font-size: 28px;
       font-weight: bold;
-      margin: 20px auto;
-      max-width: 600px;
-      font-size: 16px;
+      margin: 10px 0;
     }
 
     button {
-      margin-top: 25px;
-      padding: 12px 24px;
+      margin-top: 12px;
+      padding: 10px 20px;
       font-size: 16px;
-      background-color: #3498db;
+      background-color: #008CBA;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #2980b9;
+      background-color: #005f7a;
     }
 
-    video {
-      width: 100%;
-      max-width: 720px;
+    .logo-rodape {
+      width: 160px;
+      margin-top: 40px;
+    }
+
+    #mensagem-final {
       margin-top: 30px;
       display: none;
     }
 
-    .logo {
-      width: 180px;
-      margin-top: 40px;
+    video {
+      margin-top: 20px;
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Uma cápsula do tempo para o coração</h1>
 
-    <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada">
+  <h1>Uma mensagem especial te espera ao final da contagem regressiva.</h1>
 
-    <p class="mensagem">
-      Já imaginou receber uma mensagem de si mesmo ou de alguém especial, enviada em outro tempo?<br>
-      Essa cápsula foi criada com carinho, para te fazer lembrar, emocionar, sorrir...<br>
-      Espere os segundos passarem e, quando o vídeo surgir, assista com atenção e carinho.<br>
-      É um momento só seu. E o melhor? Você pode reviver isso todo ano!
-    </p>
+  <p>Uma cápsula do tempo é um convite para sentir. Para lembrar do que importa, registrar sonhos, dizer o que o coração sente — seja para você mesma, ou para alguém que você ama.  
+  </p>
+  <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
+  A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-    <div id="contador">30</div>
+  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada" />
 
-    <p class="aviso">
-      ✧ Atenção: se você clicar em <em>“Recomeçar”</em> ou atualizar a página, a contagem reinicia do zero e o vídeo aparece só ao final. Viva esse momento com calma. ✧
-    </p>
+  <div id="contador">30</div>
 
-    <button onclick="reiniciarContagem()">Recomeçar</button>
+  <button onclick="reiniciarContagem()">Recomeçar</button>
 
-    <video id="video" controls>
+  <div id="mensagem-final">
+    <video controls>
       <source src="capsula_VQ6JuIae.mp4" type="video/mp4">
-      Seu navegador não suporta vídeo.
+      Seu navegador não suporta vídeo HTML5.
     </video>
-
-    <img class="logo" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp">
   </div>
 
+  <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
+
   <script>
-    let contador = 30;
+    let tempo = 30;
     let intervalo;
 
     function iniciarContagem() {
-      document.getElementById('contador').textContent = contador;
-
+      document.getElementById('mensagem-final').style.display = 'none';
+      document.getElementById('contador').textContent = tempo;
       intervalo = setInterval(() => {
-        contador--;
-        document.getElementById('contador').textContent = contador;
-
-        if (contador <= 0) {
+        tempo--;
+        document.getElementById('contador').textContent = tempo;
+        if (tempo <= 0) {
           clearInterval(intervalo);
-          document.getElementById('contador').style.display = 'none';
-          document.getElementById('video').style.display = 'block';
+          document.getElementById('contador').textContent = '';
+          document.getElementById('mensagem-final').style.display = 'block';
         }
       }, 1000);
     }
 
     function reiniciarContagem() {
       clearInterval(intervalo);
-      contador = 30;
-      document.getElementById('contador').style.display = 'block';
-      document.getElementById('video').style.display = 'none';
+      tempo = 30;
       iniciarContagem();
     }
 
