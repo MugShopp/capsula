@@ -35,13 +35,11 @@
       line-height: 1.5;
     }
 
-    /* Ampulheta PNG menor e girando mais devagar */
-    .ampulheta-rotativa {
-      width: 150px;
+    .ampulheta {
+      width: 140px;
       height: auto;
       margin: 20px 0;
-      animation: girar 5s linear infinite;
-      transform-origin: center center;
+      animation: girar 30s linear infinite;
     }
 
     @keyframes girar {
@@ -115,8 +113,7 @@
   <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
   A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-  <!-- Ampulheta menor e girando mais devagar -->
-  <img class="ampulheta-rotativa" src="Ampulheta.png" alt="Ampulheta girando" />
+  <img class="ampulheta" src="Ampulheta.png" alt="Ampulheta girando" />
 
   <div id="contador"></div>
 
@@ -124,7 +121,7 @@
 
   <div id="mensagem-final">
     <video controls>
-      <source src="capsula_VQ6Julae.mp4" type="video/mp4" />
+      <source src="capsula_VQ6JuIae.mp4" type="video/mp4" />
       Seu navegador não suporta vídeo HTML5.
     </video>
   </div>
@@ -132,21 +129,18 @@
   <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
 
   <script>
-    const duracaoSegundos = 30;
-    let segundosRestantes = duracaoSegundos;
+    let tempoRestante = 30;
 
     function atualizarContador() {
-      if (segundosRestantes <= 0) {
+      if (tempoRestante <= 0) {
         document.getElementById('contador').textContent = '';
         document.getElementById('mensagem-final').style.display = 'block';
         clearInterval(intervalo);
         return;
       }
-      const minutos = Math.floor(segundosRestantes / 60);
-      const segundos = segundosRestantes % 60;
-      document.getElementById('contador').textContent =
-        `${minutos}m ${segundos}s`;
-      segundosRestantes--;
+
+      document.getElementById('contador').textContent = `Aguarde ${tempoRestante} segundos...`;
+      tempoRestante--;
     }
 
     function reiniciarContagem() {
