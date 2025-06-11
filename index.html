@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cápsula do Tempo - MugShopp</title>
   <style>
-    /* Fundo branco gelo */
     body {
       margin: 0;
       padding-top: 60px;
@@ -36,13 +35,24 @@
       line-height: 1.5;
     }
 
-    .ampulheta {
+    /* Ampulheta PNG com rotação */
+    .ampulheta-rotativa {
       width: 220px;
       height: auto;
       margin: 20px 0;
+      animation: girar 1s linear infinite;
+      transform-origin: center center;
     }
 
-    /* Contador mais delicado e em cinza chumbo */
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     #contador {
       font-size: 16px;
       font-weight: 400;
@@ -60,7 +70,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* Botão preto */
     button {
       margin-top: 14px;
       padding: 10px 26px;
@@ -106,7 +115,8 @@
   <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
   A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-  <img class="ampulheta" src="https://i.postimg.cc/g2Wh65Pc/giphy-3.gif" alt="Ampulheta animada" />
+  <!-- Imagem ampulheta girando -->
+  <img class="ampulheta-rotativa" src="Ampulheta.png" alt="Ampulheta girando" />
 
   <div id="contador"></div>
 
@@ -122,17 +132,22 @@
   <img class="logo-rodape" src="https://i.postimg.cc/7LWQCZjQ/Logo-Alta-Resolu-o-1.png" alt="Logo MugShopp" />
 
   <script>
-    let segundosRestantes = 30;
+    const duracaoSegundos = 30;
+    let segundosRestantes = duracaoSegundos;
 
     function atualizarContador() {
-      if (segundosRestantes > 0) {
-        document.getElementById('contador').textContent =
-          `Faltam ${segundosRestantes} segundos`;
-      } else {
-        clearInterval(intervalo);
+      if (segundosRestantes <= 0) {
         document.getElementById('contador').textContent = '';
         document.getElementById('mensagem-final').style.display = 'block';
+        clearInterval(intervalo);
+        return;
       }
+
+      const minutos = Math.floor(segundosRestantes / 60);
+      const segundos = segundosRestantes % 60;
+
+      document.getElementById('contador').textContent =
+        `${minutos}m ${segundos}s`;
 
       segundosRestantes--;
     }
