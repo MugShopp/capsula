@@ -35,12 +35,12 @@
       line-height: 1.5;
     }
 
-    /* Ampulheta PNG com rotação */
+    /* Ampulheta PNG menor e girando mais devagar */
     .ampulheta-rotativa {
-      width: 220px;
+      width: 150px;
       height: auto;
       margin: 20px 0;
-      animation: girar 1s linear infinite;
+      animation: girar 5s linear infinite;
       transform-origin: center center;
     }
 
@@ -115,7 +115,7 @@
   <p>Quando o vídeo aparecer, assista com carinho. Se quiser reviver esse momento, é só clicar em <strong>"Recomeçar"</strong> ou atualizar a página.  
   A contagem vai começar de novo — e tudo bem! Afinal, recordar esse instante pode virar um ritual bonito de amor todo ano. 💙</p>
 
-  <!-- Imagem ampulheta girando -->
+  <!-- Ampulheta menor e girando mais devagar -->
   <img class="ampulheta-rotativa" src="Ampulheta.png" alt="Ampulheta girando" />
 
   <div id="contador"></div>
@@ -142,13 +142,10 @@
         clearInterval(intervalo);
         return;
       }
-
       const minutos = Math.floor(segundosRestantes / 60);
       const segundos = segundosRestantes % 60;
-
       document.getElementById('contador').textContent =
         `${minutos}m ${segundos}s`;
-
       segundosRestantes--;
     }
 
